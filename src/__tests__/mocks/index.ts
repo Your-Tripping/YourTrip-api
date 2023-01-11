@@ -32,20 +32,21 @@ export const mockedPost : IPostRequest = {
     title: "Viajem para o rio",
     country: "Brasil",
     location:"Rio de Janeiro RJ",
-    places: {
+    places: [{
         title: "Corcovado",
         imageUrl: "corcovado.png",
         description: "Lugar maravilhoso" 
-    }
+    }]
 }
 
 export const mockedUpdatePost : IPostRequest = {
     title: "Viajem para o Sul",
     country: "Brasil",
     location:"Florianópolis SC",
-    places: {
+    places: [{
         title: "Corcovado",
         imageUrl: "corcovado.png",
         description: "Lugar maravilhoso" 
-    }
+    }]
+    
 }

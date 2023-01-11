@@ -4,7 +4,7 @@ export interface IPostRequest {
     title: string
     country: string
     location: string
-    places: IPlaceRequest
+    places: IPlaceRequest[]
 }
 
 export interface IPostResponse {
