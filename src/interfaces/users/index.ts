@@ -3,6 +3,7 @@ export interface IUserRequest {
     email: string
     password: string
     isAdm: boolean
+    bio: string
 }
 
 export interface IUser {
@@ -12,6 +13,7 @@ export interface IUser {
     isAdm: boolean
     createdAt: Date
     updatedAt: Date
+    bio: string
 }
 
 
@@ -24,4 +26,5 @@ export interface IUserUpdate {
     name?: string
     email?: string
     password?: string
+    bio?: string
 }
