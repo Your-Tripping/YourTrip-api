@@ -2,12 +2,16 @@ import * as yup from "yup";
 import { SchemaOf } from "yup";
 import { IUserRequest, IUser, IUserUpdate } from "../interfaces/users";
 
-const userSerializer: SchemaOf<IUserRequest> = yup.object().shape({
-  name: yup.string().max(40).required(),
+export const userSerializer: SchemaOf<IUser> = yup.object().shape({
+  id: yup.string().required(),
+  name: yup.string().required(),
   email: yup.string().email().required(),
-  password: yup.string().required(),
-  isAdm: yup.boolean().required(),
   bio: yup.string().required(),
+  imageUrl: yup.string().notRequired().nullable(),
+  isAdm: yup.boolean().required(),
+  isActive: yup.boolean().required(),
+  createdAt: yup.date().required(),
+  updatedAt: yup.date().required(),
 });
 
 const userUpdateSerializer: SchemaOf<IUserUpdate> = yup.object().shape({

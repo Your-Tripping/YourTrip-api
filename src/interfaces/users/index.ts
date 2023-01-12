@@ -4,6 +4,7 @@ export interface IUserRequest {
   password: string;
   isAdm: boolean;
   bio: string;
+  imageUrl?: string;
 }
 
 export interface IUser {
@@ -11,9 +12,11 @@ export interface IUser {
   name: string;
   email: string;
   isAdm: boolean;
+  isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
   bio: string;
+  imageUrl?: string | null;
 }
 
 export interface IUserLogin {
