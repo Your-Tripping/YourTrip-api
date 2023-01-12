@@ -1,6 +1,5 @@
-export interface IPlaceRequest{
-    title: string
-    imageUrl: string
-    description: string
-    
+export interface IPlaceRequest {
+  title: string;
+  imageUrl: string;
+  description: string;
 }
