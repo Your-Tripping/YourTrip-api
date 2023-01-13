@@ -1,7 +1,6 @@
 import * as yup from "yup";
 import { SchemaOf } from "yup";
 import { IPostRequest, IPostResponse } from "../interfaces/postsInterface";
-import { IPlaceRequest } from "../interfaces/places";
 
 const date = new Date().toLocaleDateString();
 
@@ -22,12 +21,6 @@ const postSerializer: SchemaOf<IPostRequest> = yup.object().shape({
   ),
 });
 
-const placeSerializer: SchemaOf<IPlaceRequest> = yup.object().shape({
-  title: yup.string().required(),
-  imageUrl: yup.string().required(),
-  description: yup.string().required(),
-});
-
 const postResponseSerializer: SchemaOf<IPostResponse> = yup.object().shape({
   title: yup.string().required(),
   country: yup.string().required(),
@@ -35,6 +28,14 @@ const postResponseSerializer: SchemaOf<IPostResponse> = yup.object().shape({
   createdAt: yup.date().max(getDate(date)).required(),
   updatedAt: yup.date().max(getDate(date)).required(),
   user: yup.string().required(),
+  id: yup.string().required(),
+  places: yup.array(
+    yup.object().shape({
+      title: yup.string().required(),
+      imageUrl: yup.string().required(),
+      description: yup.string().required(),
+    })
+  ),
 });
 
-export { postSerializer, postResponseSerializer, placeSerializer };
+export { postSerializer, postResponseSerializer };

@@ -2,6 +2,10 @@ import AppDataSource from "../../data-source";
 import { Place } from "../../entities/place.entity";
 import { Post } from "../../entities/post.entity";
 import { IPostRequest } from "../../interfaces/postsInterface";
+import {
+  postResponseSerializer,
+  postSerializer,
+} from "../../serializers/post.serializers";
 
 const createPostService = async (data: IPostRequest) => {
   const postRepository = AppDataSource.getRepository(Post);
