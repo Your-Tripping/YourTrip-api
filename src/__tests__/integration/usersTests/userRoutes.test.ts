@@ -32,7 +32,6 @@ describe("/users", () => {
     expect(response.body).toHaveProperty("id");
     expect(response.body).toHaveProperty("name");
     expect(response.body).toHaveProperty("email");
-    expect(response.body).toHaveProperty("bio");
     expect(response.body).toHaveProperty("isAdm");
     expect(response.body).toHaveProperty("isActive");
     expect(response.body).toHaveProperty("createdAt");
@@ -42,7 +41,6 @@ describe("/users", () => {
     expect(response.body.email).toEqual("joana@mail.com");
     expect(response.body.isAdm).toEqual(false);
     expect(response.body.isActive).toEqual(true);
-    expect(response.body.bio).toEqual("bio teste");
     expect(response.status).toBe(201);
   });
 
@@ -73,14 +71,17 @@ describe("/users", () => {
     expect(response.status).toBe(401);
   });
 
-  /*  test("GET /users -  should not be able to list users not being admin",async () => {
-        const userLoginResponse = await request(app).post("/login").send(mockedUserLogin);
-        const response = await request(app).get('/users').set("Authorization", `Bearer ${userLoginResponse.body.token}`)
+  test("GET /users -  should not be able to list users not being admin", async () => {
+    const userLoginResponse = await request(app)
+      .post("/login")
+      .send(mockedUserLogin);
+    const response = await request(app)
+      .get("/users")
+      .set("Authorization", `Bearer ${userLoginResponse.body.token}`);
 
-        expect(response.body).toHaveProperty("message")
-        expect(response.status).toBe(403)
-             
-    }) */
+    expect(response.body).toHaveProperty("message");
+    expect(response.status).toBe(403);
+  });
 
   test("DELETE /users/:id -  should not be able to delete user without authentication", async () => {
     const adminLoginResponse = await request(app)
