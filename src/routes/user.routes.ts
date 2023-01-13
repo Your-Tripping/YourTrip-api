@@ -5,7 +5,7 @@ import { getUserController } from "../controllers/getUser.controller";
 import { getUserByIdController } from "../controllers/getUserById.controller";
 import { updateUserController } from "../controllers/updateUser.controller";
 import adminAuthMiddleware from "../middlewares/adminAuth.middleware";
-import validTokenMiddleware from "../middlewares/tokenAuth.middleware";
+import tokenAuthMiddleware from "../middlewares/tokenAuth.middleware";
 import { validateUpdateFieldsMiddleware } from "../middlewares/validateUpdateFields.middleware";
 import { verifyEmailIsAvailableMiddleware } from "../middlewares/verifyEmailIsAvailable.middleware";
 import { verifyUserExistsMiddleware } from "../middlewares/verifyUserExists.middleware";
@@ -15,10 +15,10 @@ import { verifyUserLoggedInMiddleware } from "../middlewares/verifyUserLoggedIn.
 const userRoutes = Router();
 
 userRoutes.post("", verifyEmailIsAvailableMiddleware, createUserController);
-userRoutes.get("", validTokenMiddleware, getUserController);
+userRoutes.get("", tokenAuthMiddleware, getUserController);
 userRoutes.delete(
   "/:id",
-  validTokenMiddleware,
+  tokenAuthMiddleware,
   adminAuthMiddleware,
   verifyUserExistsMiddleware,
   verifyUserIsActiveMiddleware,
@@ -26,7 +26,7 @@ userRoutes.delete(
 );
 userRoutes.patch(
   "/:id",
-  validTokenMiddleware,
+  tokenAuthMiddleware,
   verifyUserExistsMiddleware,
   verifyUserLoggedInMiddleware,
   adminAuthMiddleware,
@@ -35,7 +35,7 @@ userRoutes.patch(
 );
 userRoutes.get(
   "/:id",
-  validTokenMiddleware,
+  tokenAuthMiddleware,
   verifyUserExistsMiddleware,
   getUserByIdController
 );

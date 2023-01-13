@@ -8,11 +8,11 @@ export const verifyUserLoggedInMiddleware = async (
   _res: Response,
   next: NextFunction
 ) => {
-  const email = req.foundUser.email;
+  const id = req.user.id;
 
   const userRepo = AppDataSource.getRepository(User);
 
-  const foundUser = await userRepo.findOneBy({ email: email });
+  const foundUser = await userRepo.findOneBy({ id: id });
 
   if (!foundUser) {
     throw new AppError("Unauthorized!", 403);

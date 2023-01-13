@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getUserByIdService } from "../services/getUserById.service";
+import { getUserByIdService } from "../services/users/getUserById.service";
 
 export const getUserByIdController = async (req: Request, res: Response) => {
   const userData = await getUserByIdService(req.foundUser);

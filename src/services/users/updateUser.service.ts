@@ -1,7 +1,7 @@
-import { User } from "../entities/user.entity";
-import { IUserUpdate } from "../interfaces/users";
-import AppDataSource from "../data-source";
-import { userSerializer } from "../serializers/user.serializers";
+import { User } from "../../entities/user.entity";
+import { IUserUpdate } from "../../interfaces/users";
+import AppDataSource from "../../data-source";
+import { userSerializer } from "../../serializers/user.serializers";
 
 export const updateUserService = async (
   user: User,

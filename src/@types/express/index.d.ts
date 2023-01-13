@@ -1,4 +1,5 @@
 import * as express from "express";
+import { Post } from "../../entities/post.entity";
 import { User } from "../../entities/user.entity";
 
 declare global {
@@ -12,6 +13,7 @@ declare global {
       foundUser: User;
       validatedBody: object;
       loggedIn: boolean;
+      foundPost: Post;
     }
   }
 }
