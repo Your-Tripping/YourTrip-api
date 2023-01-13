@@ -4,6 +4,7 @@ export interface IUserRequest {
   password: string;
   bio: string;
   imageUrl?: string;
+  isAdm: boolean;
 }
 
 export interface IUser {
