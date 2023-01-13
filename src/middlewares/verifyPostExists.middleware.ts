@@ -9,14 +9,19 @@ export const verifyPostExistsMiddleware = async (
   next: NextFunction
 ) => {
   const postRepository = AppDataSource.getRepository(Post);
+  const postQueryBuilder = postRepository.createQueryBuilder("post");
 
-  const post = await postRepository.findOneBy({
-    id: req.params.id,
-  });
+  const post = await postQueryBuilder
+    .leftJoinAndSelect("post.places", "places")
+    .leftJoinAndSelect("post.user", "user")
+    .where("post.id = :id", { id: req.params.id })
+    .getOne();
 
   if (!post) {
     throw new AppError("Invalid ID", 404);
   }
+
+  console.log(post);
 
   req.foundPost = post;
 

@@ -8,7 +8,7 @@ import {
 import adminAuthMiddleware from "../middlewares/adminAuth.middleware";
 import tokenAuthMiddleware from "../middlewares/tokenAuth.middleware";
 import { verifyPostExistsMiddleware } from "../middlewares/verifyPostExists.middleware";
-import { verifyUserLoggedInMiddleware } from "../middlewares/verifyUserLoggedIn.middleware";
+import { verifyUserOwnsPostMiddleware } from "../middlewares/verifyUserOwnsPost.middleware";
 
 const postsRoutes = Router();
 
@@ -17,17 +17,17 @@ postsRoutes.get("", listPostsController);
 postsRoutes.patch(
   "/:id",
   tokenAuthMiddleware,
-  verifyUserLoggedInMiddleware,
-  adminAuthMiddleware,
   verifyPostExistsMiddleware,
+  verifyUserOwnsPostMiddleware,
+  adminAuthMiddleware,
   updatePostController
 );
 postsRoutes.delete(
   "/:id",
   tokenAuthMiddleware,
-  verifyUserLoggedInMiddleware,
-  adminAuthMiddleware,
   verifyPostExistsMiddleware,
+  verifyUserOwnsPostMiddleware,
+  adminAuthMiddleware,
   deletePostController
 );
 

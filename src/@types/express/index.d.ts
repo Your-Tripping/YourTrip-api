@@ -13,6 +13,7 @@ declare global {
       foundUser: User;
       validatedBody: object;
       loggedIn: boolean;
+      isOwner: boolean;
       foundPost: Post;
     }
   }
