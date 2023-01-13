@@ -5,7 +5,7 @@ import "dotenv/config";
 
 const tokenAuthMiddleware = (
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction
 ) => {
   let token = req.headers.authorization?.split(" ")[1];
@@ -14,7 +14,7 @@ const tokenAuthMiddleware = (
     throw new AppError("Invalid token", 401);
   }
 
-  jwt.verify(token, process.env.SECRET_KEY, (err, decoded: any) => {
+  jwt.verify(token, process.env.SECRET_KEY!, (err, decoded: any) => {
     if (err) {
       throw new AppError(err.message, 401);
     }

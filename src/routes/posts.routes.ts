@@ -5,13 +5,30 @@ import {
   listPostsController,
   updatePostController,
 } from "../controllers/posts.controllers";
-import validTokenMiddleware from "../middlewares/tokenAuth.middleware";
+import adminAuthMiddleware from "../middlewares/adminAuth.middleware";
+import tokenAuthMiddleware from "../middlewares/tokenAuth.middleware";
+import { verifyPostExistsMiddleware } from "../middlewares/verifyPostExists.middleware";
+import { verifyUserOwnsPostMiddleware } from "../middlewares/verifyUserOwnsPost.middleware";
 
 const postsRoutes = Router();
 
-postsRoutes.post("", validTokenMiddleware, createPostController);
+postsRoutes.post("", tokenAuthMiddleware, createPostController);
 postsRoutes.get("", listPostsController);
-postsRoutes.patch("/:id", validTokenMiddleware, updatePostController);
-postsRoutes.delete("/:id", validTokenMiddleware, deletePostController);
+postsRoutes.patch(
+  "/:id",
+  tokenAuthMiddleware,
+  verifyPostExistsMiddleware,
+  verifyUserOwnsPostMiddleware,
+  adminAuthMiddleware,
+  updatePostController
+);
+postsRoutes.delete(
+  "/:id",
+  tokenAuthMiddleware,
+  verifyPostExistsMiddleware,
+  verifyUserOwnsPostMiddleware,
+  adminAuthMiddleware,
+  deletePostController
+);
 
 export default postsRoutes;

@@ -17,12 +17,12 @@ const listPostsController = async (req: Request, res: Response) => {
 };
 
 const updatePostController = async (req: Request, res: Response) => {
-  const updatedPost = await updatePostService(req.params.id, req.body);
+  const updatedPost = await updatePostService(req.foundPost, req.body);
   return res.status(201).json(updatedPost);
 };
 
 const deletePostController = async (req: Request, res: Response) => {
-  const deletePost = await deletePostService(req.params.id);
+  const deletePost = await deletePostService(req.foundPost);
   return res.status(204).json({ message: "Post deletado com sucesso" });
 };
 

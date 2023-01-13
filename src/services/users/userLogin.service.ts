@@ -34,7 +34,7 @@ export const userLoginService = async ({
     },
     process.env.SECRET_KEY as string,
     {
-      subject: user.id,
+      subject: String(user.id),
       expiresIn: "24h",
     }
   );

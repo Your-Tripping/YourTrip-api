@@ -10,6 +10,8 @@ const listPostsService = async (): Promise<Post[]> => {
     },
   });
 
+  console.log(posts);
+
   return posts;
 };
 
