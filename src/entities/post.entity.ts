@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   ManyToOne,
   OneToMany,
+  DeleteDateColumn,
 } from "typeorm";
 import { Place } from "./place.entity";
 import { User } from "./user.entity";
@@ -27,8 +28,14 @@ export class Post {
   @CreateDateColumn()
   createdAt: Date;
 
+  @Column({ default: "active" })
+  status: string;
+
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 
   @ManyToOne(() => User, (user) => user.posts)
   user: User;
