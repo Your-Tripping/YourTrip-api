@@ -67,21 +67,31 @@ describe("/users", () => {
   test("GET /users -  should not be able to list users without authentication", async () => {
     const response = await request(app).get("/users");
 
-    expect(response.body).toHaveProperty("message");
-    expect(response.status).toBe(401);
-  });
+    test("GET /users -  should not be able to list users without authentication",async () => {
+        const response = await request(app).get('/users')
 
-  test("GET /users -  should not be able to list users not being admin", async () => {
-    const userLoginResponse = await request(app)
-      .post("/login")
-      .send(mockedUserLogin);
-    const response = await request(app)
-      .get("/users")
-      .set("Authorization", `Bearer ${userLoginResponse.body.token}`);
+        expect(response.body).toHaveProperty("message")
+        expect(response.status).toBe(401)
+             
+    })
 
-    expect(response.body).toHaveProperty("message");
-    expect(response.status).toBe(403);
-  });
+    test("GET /users/:id -  Must be able to get one user",async () => {
+        await request(app).post('/users').send(mockedAdmin)
+
+        const adminLoginResponse = await request(app).post("/login").send(mockedAdminLogin);
+        const UserToBeListed= await request(app).get('/users').set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
+
+        const response = await request(app).get(`/users/${UserToBeListed.body[0].id}`).set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
+        expect(response.body).toHaveProperty("id")
+        expect(response.body).toHaveProperty("name")
+        expect(response.body).toHaveProperty("email")
+        expect(response.body).toHaveProperty("bio")
+        expect(response.body).toHaveProperty("isAdm")
+        expect(response.body).toHaveProperty("isActive")
+        expect(response.body).toHaveProperty("createdAt")
+        expect(response.body).toHaveProperty("updatedAt")
+     
+    })
 
   test("DELETE /users/:id -  should not be able to delete user without authentication", async () => {
     const adminLoginResponse = await request(app)

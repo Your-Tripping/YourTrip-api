@@ -3,12 +3,12 @@ import { AppError } from "../error/errors";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-const validTokenMiddleware = (
+const tokenAuthMiddleware = (
   req: Request,
   _res: Response,
   next: NextFunction
 ) => {
-  const token = req.headers.authorization?.split(" ")[1];
+  let token = req.headers.authorization?.split(" ")[1];
 
   if (!token) {
     throw new AppError("Invalid token", 401);
@@ -29,4 +29,4 @@ const validTokenMiddleware = (
   });
 };
 
-export default validTokenMiddleware;
+export default tokenAuthMiddleware;

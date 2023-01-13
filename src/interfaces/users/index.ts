@@ -5,6 +5,7 @@ export interface IUserRequest {
   bio: string;
   isAdm?: boolean;
   imageUrl?: string;
+  isAdm: boolean;
 }
 
 export interface IUser {
