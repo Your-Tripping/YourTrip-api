@@ -3,7 +3,7 @@ import { AppError } from "../error/errors";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-const validTokenMiddleware = (
+const tokenAuthMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -29,4 +29,4 @@ const validTokenMiddleware = (
   });
 };
 
-export default validTokenMiddleware;
+export default tokenAuthMiddleware;
