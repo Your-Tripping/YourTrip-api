@@ -1,4 +1,4 @@
-# S5-19 | 🏁 Entrega: KImóveis - TypeORM com Relacionamentos
+# YourTrip api
 
 Para inciar este projeto, é necessário instalar as dependências, que serão utilizadas nos testes. Portanto utilize o comando abaixo para instalar tais dependências:
 
@@ -69,9 +69,9 @@ yarn test ./scr/__tests__/integration/<subpasta>/<arquivo>
 yarn test -t <describe ou test específico envolto em aspas>
 ````
 ````
-\\ ex: yarn test -t "/categories"
-\\ rodaria os testes do describe "/categorias" no caminho
-\\ ./scr/__tests__/integration/categories/categoriesRoutes.test.ts
+\\ ex: yarn test -t "/sessions"
+\\ rodaria os testes do describe "/sessions" no caminho
+\\ ./scr/__tests__/integration/sessions/sessionsRoutes.test.ts
 ````
 
 <br>
@@ -87,4 +87,3 @@ Após rodar um dos comandos aparecerá um log no seu terminal, contendo as infor
 
 
 
-### Agora que já sabe como iniciar o seu projeto e rodar os testes, é hora de colocar a mão no código!
