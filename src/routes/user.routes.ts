@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { ValidationError } from "yup";
 import { createUserController } from "../controllers/createUser.controllers";
 import { deleteUserController } from "../controllers/deleteUser.controller";
 import { getUserController } from "../controllers/getUser.controller";
+import { getUserByIdController } from "../controllers/getUserById.controller";
 import { updateUserController } from "../controllers/updateUser.controller";
 import adminAuthMiddleware from "../middlewares/adminAuth.middleware";
 import validTokenMiddleware from "../middlewares/tokenAuth.middleware";
@@ -32,6 +32,12 @@ userRoutes.patch(
   adminAuthMiddleware,
   validateUpdateFieldsMiddleware,
   updateUserController
+);
+userRoutes.get(
+  "/:id",
+  validTokenMiddleware,
+  verifyUserExistsMiddleware,
+  getUserByIdController
 );
 
 export default userRoutes;
