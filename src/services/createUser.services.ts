@@ -1,34 +1,20 @@
 import AppDataSource from "../data-source";
 import { User } from "../entities/user.entity";
-import { AppError } from "../error/errors";
 import { IUser, IUserRequest } from "../interfaces/users";
-import { createUserSerializer } from "../serializers/user.serializers";
+import { userSerializer } from "../serializers/user.serializers";
 
 export const createUserService = async (
   userData: IUserRequest
-) => {
+): Promise<IUser> => {
   const userRepo = AppDataSource.getRepository(User);
+  const newUser = userRepo.create(userData);
 
-  const validatedUser = await createUserSerializer
-    .validate(userData, {
-      stripUnknown: true,
-      abortEarly: true,
-    })
-    .catch((err) => {
-      throw new AppError(err.errors[0], 400);
-    });
+  await userRepo.save(newUser);
 
-  const newUser = userRepo.create({
-    ...userData,
-    updatedAt: new Date(),
-    createdAt: new Date(),
-    isAdm: false,
+  const validatedUser = await userSerializer.validate(newUser, {
+    stripUnknown: true,
+    abortEarly: true,
   });
 
-  const user: Partial<Pick<User, "password">> & Omit<User, "password"> =
-    await userRepo.save(newUser);
-
-  delete user.password;
-
-  return user;
+  return validatedUser;
 };

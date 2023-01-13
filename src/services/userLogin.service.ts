@@ -8,29 +8,36 @@ import { AppError } from "../error/errors";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-export const userLoginService = async ({email, password}: IUserLogin): Promise<{token: string}> => {
-    const userRepository = AppDataSource.getRepository(User);
+export const userLoginService = async ({
+  email,
+  password,
+}: IUserLogin): Promise<{ token: string }> => {
+  const userRepository = AppDataSource.getRepository(User);
 
-    const user = await userRepository.findOneBy({
-        email: email
-    });
+  const user = await userRepository.findOneBy({
+    email: email,
+  });
 
-    const passwordCheck = await compare(password, user?.password as string);
+  const passwordCheck = await compare(password, user?.password as string);
 
-    if(!user?.isActive){
-        throw new AppError("User inactive!", 400)
+  if (!user?.isActive) {
+    throw new AppError("User inactive!", 400);
+  }
+
+  if (!user || !passwordCheck) {
+    throw new AppError("Invalid User or password!", 403);
+  }
+
+  const token = jwt.sign(
+    {
+      isAdm: user.isAdm,
+    },
+    process.env.SECRET_KEY as string,
+    {
+      subject: user.id,
+      expiresIn: "24h",
     }
+  );
 
-    if(!user || !passwordCheck ) {
-        throw new AppError("Invalid User or password!", 403)
-    };
-
-    const token = jwt.sign({
-        isAdm: user.isAdm
-    }, process.env.SECRET_KEY as string,{
-        subject: user.id,
-        expiresIn: "24h"
-    });
-
-    return {token: token}
-}
+  return { token: token };
+};

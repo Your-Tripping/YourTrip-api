@@ -8,8 +8,6 @@ export const verifyUserIsActiveMiddleware = (
 ) => {
   const foundUser = req.foundUser;
 
-  console.log(foundUser.isActive);
-
   if (foundUser.isActive === false) {
     throw new AppError("User inactive", 400);
   }

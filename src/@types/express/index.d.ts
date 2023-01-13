@@ -1,4 +1,5 @@
 import * as express from "express";
+import { User } from "../../entities/user.entity";
 
 declare global {
   namespace Express {
@@ -8,6 +9,9 @@ declare global {
         isAdm: boolean;
         isActive: boolean;
       };
+      foundUser: User;
+      validatedBody: object;
+      loggedIn: boolean;
     }
   }
 }
