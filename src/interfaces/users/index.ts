@@ -3,7 +3,6 @@ export interface IUserRequest {
   email: string;
   password: string;
   bio: string;
-  isAdm?: boolean;
   imageUrl?: string;
   isAdm: boolean;
 }
