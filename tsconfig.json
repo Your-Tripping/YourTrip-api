@@ -14,6 +14,6 @@
       "src/@types",
       "node_modules/@types",
     ],
-    //"types": ["jest", "node"]
+    "types": ["@types/jest"]
   }
 }
