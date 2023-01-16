@@ -3,6 +3,7 @@ import { IPostRequest } from "../interfaces/postsInterface";
 import createPostService from "../services/posts/createPost.service";
 import deletePostService from "../services/posts/deletePost.service";
 import listPostsService from "../services/posts/listPosts.service";
+import listPostsByUserService from "../services/posts/listPostsByUser.service";
 import updatePostService from "../services/posts/updatePost.service";
 
 const createPostController = async (req: Request, res: Response) => {
@@ -13,6 +14,11 @@ const createPostController = async (req: Request, res: Response) => {
 
 const listPostsController = async (req: Request, res: Response) => {
   const posts = await listPostsService();
+  return res.json(posts);
+};
+
+const listPostsByUserController = async (req: Request, res: Response) => {
+  const posts = await listPostsByUserService(req.params.id);
   return res.json(posts);
 };
 
@@ -29,6 +35,7 @@ const deletePostController = async (req: Request, res: Response) => {
 export {
   createPostController,
   listPostsController,
+  listPostsByUserController,
   updatePostController,
   deletePostController,
 };
