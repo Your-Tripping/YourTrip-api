@@ -8,6 +8,7 @@ import {
   OneToMany,
   DeleteDateColumn,
 } from "typeorm";
+import { Comments } from "./comments.entity";
 import { Place } from "./place.entity";
 import { User } from "./user.entity";
 
@@ -42,4 +43,7 @@ export class Post {
 
   @OneToMany(() => Place, (place) => place.post)
   places: Post[];
+
+  @OneToMany(() => Comments, (Comment) => Comment.post)
+  comments: Comments[];
 }
