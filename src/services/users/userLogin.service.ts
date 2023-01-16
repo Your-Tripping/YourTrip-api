@@ -18,15 +18,21 @@ export const userLoginService = async ({
     email: email,
   });
 
+  if( !user ) {
+    throw new AppError("User not found!", 404)
+  }
+
   const passwordCheck = await compare(password, user?.password as string);
 
   if (!user?.isActive) {
     throw new AppError("User inactive!", 400);
   }
-
-  if (!user || !passwordCheck) {
+  
+  if (!passwordCheck) {
     throw new AppError("Invalid User or password!", 403);
   }
+
+
 
   const token = jwt.sign(
     {
