@@ -7,10 +7,9 @@ const listPostsService = async (): Promise<Post[]> => {
   const posts = await postRepository.find({
     relations: {
       places: true,
+      user: true,
     },
   });
-
-  console.log(posts);
 
   return posts;
 };
