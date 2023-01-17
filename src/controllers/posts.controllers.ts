@@ -8,7 +8,8 @@ import updatePostService from "../services/posts/updatePost.service";
 
 const createPostController = async (req: Request, res: Response) => {
   const postData: IPostRequest = req.body;
-  const newPost = await createPostService(postData);
+  const user = req.user.id;
+  const newPost = await createPostService(postData, user);
   return res.status(201).json(newPost);
 };
 
