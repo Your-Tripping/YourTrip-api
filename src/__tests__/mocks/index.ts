@@ -1,5 +1,6 @@
 import { IUserLogin,IUserRequest } from "../../interfaces/users";
 import { IPostRequest } from "../../interfaces/postsInterface";
+import { ICommentRequest } from "../../interfaces/comments";
 
 export const mockedUser : IUserRequest = {
     name: "Joana",
@@ -49,4 +50,12 @@ export const mockedUpdatePost : IPostRequest = {
         description: "Lugar maravilhoso" 
     }]
     
+}
+
+export const mockedComment : ICommentRequest = {
+    content: "Muto legal"
+}
+
+export const mockedUpdateComment : ICommentRequest = {
+    content: "Muito legal"
 }
