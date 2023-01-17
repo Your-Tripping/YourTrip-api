@@ -1,11 +1,15 @@
 import AppDataSource from "../../data-source";
 import { Comments } from "../../entities/comments.entity";
 import { AppError } from "../../error/errors";
+import { ICommentsRequest } from "../../interfaces/comments";
 
-const updateCommentsService = async (content: any, comment_id: string) => {
+const updateCommentsService = async (
+  content: ICommentsRequest,
+  comment_id: string
+) => {
   const commentsReository = AppDataSource.getRepository(Comments);
 
-  const comment = commentsReository.findOneBy({ id: comment_id });
+  const comment = await commentsReository.findOneBy({ id: comment_id });
 
   if (!comment) {
     throw new AppError("Comment não exist", 404);
@@ -17,9 +21,9 @@ const updateCommentsService = async (content: any, comment_id: string) => {
     updatedAt: new Date(),
   });
 
-  const newComment = await commentsReository.save(updateComment);
+  await commentsReository.save(updateComment);
 
-  return newComment;
+  return updateComment;
 };
 
 export default updateCommentsService;
