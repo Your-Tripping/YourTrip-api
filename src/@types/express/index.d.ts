@@ -1,4 +1,5 @@
 import * as express from "express";
+import { Place } from "../../entities/place.entity";
 import { Post } from "../../entities/post.entity";
 import { User } from "../../entities/user.entity";
 
@@ -15,6 +16,7 @@ declare global {
       loggedIn: boolean;
       isOwner: boolean;
       foundPost: Post;
+      foundPlace: Place;
     }
   }
 }
