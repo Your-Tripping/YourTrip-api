@@ -18,7 +18,7 @@ export class Comments {
   createdAt: Date;
 
   @UpdateDateColumn()
-  UpdatedAt: Date;
+  updatedAt: Date;
 
   @Column({ length: 280 })
   content: string;
