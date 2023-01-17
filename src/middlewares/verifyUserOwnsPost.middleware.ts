@@ -5,7 +5,9 @@ export const verifyUserOwnsPostMiddleware = async (
   _res: Response,
   next: NextFunction
 ) => {
-  const id = req.foundPost.id;
+  const id = req.foundPost.user.id;
+
+  console.log(req.foundPost);
 
   if (req.user.id === id) {
     req.isOwner = true;

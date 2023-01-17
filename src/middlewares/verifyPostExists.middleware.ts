@@ -21,8 +21,6 @@ export const verifyPostExistsMiddleware = async (
     throw new AppError("Invalid ID", 404);
   }
 
-  console.log(post);
-
   req.foundPost = post;
 
   return next();
