@@ -17,7 +17,7 @@ const createCommentsService = async (
   });
 
   if (!postExist) {
-    throw new AppError("Post não exist", 404);
+    throw new AppError("Post não exist!", 404);
   }
 
   const comment = commentReository.create({

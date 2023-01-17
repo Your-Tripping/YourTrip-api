@@ -4,6 +4,7 @@ import deleteCommentsController from "../controllers/comments/deleteComments.con
 import updateCommentsController from "../controllers/comments/updateComments.controller";
 import tokenAuthMiddleware from "../middlewares/tokenAuth.middleware";
 import verifyCommentMiddleware from "../middlewares/verifyComment.middleware";
+import verifyPostUserCommentUserOrAdminMiddleware from "../middlewares/verifyPostUserCommentUserOrAdmin.middleware";
 
 const commentsRoutes = Router();
 
@@ -14,6 +15,11 @@ commentsRoutes.patch(
   verifyCommentMiddleware,
   updateCommentsController
 );
-commentsRoutes.delete("/:id", tokenAuthMiddleware, deleteCommentsController);
+commentsRoutes.delete(
+  "/:id",
+  tokenAuthMiddleware,
+  verifyPostUserCommentUserOrAdminMiddleware,
+  deleteCommentsController
+);
 
 export default commentsRoutes;
