@@ -2,7 +2,7 @@ import AppDataSource from "../../data-source";
 import { Comments } from "../../entities/comments.entity";
 import { Post } from "../../entities/post.entity";
 import { AppError } from "../../error/errors";
-import { ICommentsRequest } from "../../interfaces/comments";
+import { ICommentRequest } from "../../interfaces/comments";
 
 const createCommentsService = async (
   content: any,
