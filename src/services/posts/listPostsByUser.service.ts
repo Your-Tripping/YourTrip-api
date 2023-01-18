@@ -10,6 +10,8 @@ const listPostsByUserService = async (id: string): Promise<Post[]> => {
     .where("posts.user = :id_user", { id_user: id })
     .getMany();
 
-  return posts;
+  const returnPost = []
+  returnPost.push(posts)
+  return returnPost;
 };
 export default listPostsByUserService;
