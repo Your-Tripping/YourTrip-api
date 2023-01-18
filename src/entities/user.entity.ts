@@ -10,6 +10,7 @@ import {
 } from "typeorm";
 import { hashSync } from "bcryptjs";
 import { Post } from "./post.entity";
+import { Comments } from "./comments.entity";
 
 @Entity("users")
 export class User {
@@ -51,4 +52,7 @@ export class User {
 
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[];
+
+  @OneToMany(() => Comments, (comment) => comment.user)
+  comments: Comments[];
 }
