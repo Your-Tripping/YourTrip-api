@@ -1,22 +1,18 @@
 import AppDataSource from "../../data-source";
-import { Comments } from "../../entities/comments.entity";
+import { Likes } from "../../entities/likes.entity";
 import { Post } from "../../entities/post.entity";
 import { User } from "../../entities/user.entity";
 import { AppError } from "../../error/errors";
-import { ICommentRequest } from "../../interfaces/comments";
 
-const createCommentsService = async (
-  content: ICommentRequest,
-  user_id: string,
-  post_id: string
-): Promise<Comments> => {
+const createlikesService = async (
+  post_id: string,
+  user_id: string
+): Promise<Likes> => {
+  const likesRepository = AppDataSource.getRepository(Likes);
   const postRepository = AppDataSource.getRepository(Post);
-  const commentReository = AppDataSource.getRepository(Comments);
   const userRepository = AppDataSource.getRepository(User);
 
-  const postExist = await postRepository.findOneBy({
-    id: post_id,
-  });
+  const postExist = await postRepository.findOneBy({ id: post_id });
 
   if (!postExist) {
     throw new AppError("Post não exist!", 404);
@@ -28,15 +24,14 @@ const createCommentsService = async (
     throw new AppError("User não exist!", 404);
   }
 
-  const comment = commentReository.create({
-    ...content,
+  const like = likesRepository.create({
     post: postExist,
     user: userExist,
   });
 
-  await commentReository.save(comment);
+  await likesRepository.save(like);
 
-  return comment;
+  return like;
 };
 
-export default createCommentsService;
+export default createlikesService;

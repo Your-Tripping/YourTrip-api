@@ -11,6 +11,7 @@ import {
 import { hashSync } from "bcryptjs";
 import { Post } from "./post.entity";
 import { Comments } from "./comments.entity";
+import { Likes } from "./likes.entity";
 
 @Entity("users")
 export class User {
@@ -55,4 +56,7 @@ export class User {
 
   @OneToMany(() => Comments, (comment) => comment.user)
   comments: Comments[];
+
+  @OneToMany(() => Likes, (Likes) => Likes.user)
+  likes: Likes[];
 }
