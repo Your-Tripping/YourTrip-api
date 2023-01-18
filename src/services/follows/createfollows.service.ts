@@ -6,7 +6,7 @@ import { AppError } from "../../error/errors";
 const createfollowsService = async (
   follower_id: string,
   following_id: string
-) => {
+): Promise<Follows> => {
   const followRepository = AppDataSource.getRepository(Follows);
   const userRepository = AppDataSource.getRepository(User);
 
@@ -25,8 +25,8 @@ const createfollowsService = async (
   }
 
   const follow = followRepository.create({
-    following: following_id,
-    follower: follower_id,
+    follower: followerUserExist,
+    following: followingUserExist,
   });
 
   await followRepository.save(follow);
