@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createPostController,
   deletePostController,
+  listPostsByUserController,
   listPostsController,
   updatePostController,
 } from "../controllers/posts.controllers";
@@ -14,6 +15,7 @@ const postsRoutes = Router();
 
 postsRoutes.post("", tokenAuthMiddleware, createPostController);
 postsRoutes.get("", listPostsController);
+postsRoutes.get("/users/:id", listPostsByUserController);
 postsRoutes.patch(
   "/:id",
   tokenAuthMiddleware,

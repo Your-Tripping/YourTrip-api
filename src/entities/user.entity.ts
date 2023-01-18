@@ -10,6 +10,9 @@ import {
 } from "typeorm";
 import { hashSync } from "bcryptjs";
 import { Post } from "./post.entity";
+import { Comments } from "./comments.entity";
+import { Likes } from "./likes.entity";
+import { Follows } from "./follows.entity";
 
 @Entity("users")
 export class User {
@@ -51,4 +54,16 @@ export class User {
 
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[];
+
+  @OneToMany(() => Comments, (comment) => comment.user)
+  comments: Comments[];
+
+  @OneToMany(() => Likes, (Likes) => Likes.user)
+  likes: Likes[];
+
+  @OneToMany(() => Follows, (followe) => followe.follower)
+  follows: Follows[];
+
+  @OneToMany(() => Follows, (followe) => followe.following)
+  following: Follows[];
 }
